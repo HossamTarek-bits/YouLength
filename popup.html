@@ -11,12 +11,17 @@
 <body>
     <div class="App">
 
-        <button type="button" class="btn btn-outline-light" id="getLength">Click Here</button>
         <span id="hours">0 hrs</span>
         <br>
         <span id="mins">0 mins</span>
         <br>
         <span id="secs">0 secs</span>
+        <br>
+        <button type="button" class="btn btn-outline-light" id="getLength">Click Here</button>
+        <div class="input-group mb-3">
+            <input type="number" min="1" step="1" id="start" class="form-control" placeholder="start" aria-label="start">
+            <input type="number" min="1" step="1" id="end" class="form-control" placeholder="end" aria-label="end">
+          </div>
         <script src="index.js"></script>
     </div>
 </body>

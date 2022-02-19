@@ -5,6 +5,7 @@ getLength.addEventListener("click", async () => {
     chrome.scripting.executeScript({
       target: { tabId: tab.id},
       func: getLengthFunction,
+      args: [document.getElementById('start').value,document.getElementById('end').value]
     },(totalTime)=>{
         if(totalTime){
         const hours = Math.trunc(totalTime[0].result/3600)
@@ -18,11 +19,13 @@ getLength.addEventListener("click", async () => {
     
   });
 
-function getLengthFunction(){
-    const playlist = document.getElementsByTagName("ytd-playlist-panel-renderer")[1]?.getElementsByClassName("style-scope ytd-thumbnail-overlay-time-status-renderer")
+function getLengthFunction(s,e){
+    const playlist = Array.from(document.getElementsByTagName("ytd-playlist-panel-renderer")[1]?.getElementsByClassName("style-scope ytd-thumbnail-overlay-time-status-renderer")).filter(e => e.innerText)
     if(!playlist) return null
     let totalTime = 0
-    for(let i =0;i<playlist.length;i++){
+    const start = s?parseInt(s)-1:0
+    const end = e?parseInt(e):playlist.length
+    for(let i = start;i<end;i++){
         const howLong = playlist[i].innerText
         if(howLong){
             const times = howLong.trim().split(":")
